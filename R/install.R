@@ -1,9 +1,9 @@
 #' install
-#' @inheritParams devtools::install
+#' @inheritParams renv::install
 #' @export
 #' @description Installs the vendored package to the `./rvendor` directory
 install <- function(...) {
-  withr::with_libpaths(here::here("./rvendor"), devtools::install(..., force = TRUE))
+  withr::with_libpaths(here::here("./rvendor"), renv::install(..., force = TRUE))
 }
 
 #' activate
