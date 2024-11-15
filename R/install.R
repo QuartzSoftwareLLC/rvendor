@@ -38,7 +38,7 @@ install <- function(...) {
 #' @export
 #' @description Activates the vendored package by adding the `./rvendor` directory to the search path
 activate <- function() {
-  .libPaths(c("./rvendor", .libPaths()))
+  .libPaths(c(.libPaths(), "./rvendor"))
 }
 
 
