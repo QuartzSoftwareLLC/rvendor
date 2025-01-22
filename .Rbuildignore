@@ -1,2 +1,4 @@
 ^rvendor\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+oldtests

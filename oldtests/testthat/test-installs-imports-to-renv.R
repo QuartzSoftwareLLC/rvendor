@@ -11,7 +11,6 @@ test_that("multiplication works", {
   rvendor::activate()
   library(mockWithDeps)
   print(hello_world())
-  browser()
 })
 
 
