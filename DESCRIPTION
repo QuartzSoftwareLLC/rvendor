@@ -1,6 +1,6 @@
 Package: rvendor
-Title: Package Vendoring with renv
-Version: 0.0.3
+Title: Package Vendoring with Renv
+Version: 0.0.4
 Authors@R: 
     person("Jacob", "Clarke", , "jacobclarke@quartzsoftware.com", role = c("aut", "cre"))
 Description: Vendor private R packages into environments where private credentials cannot be set.

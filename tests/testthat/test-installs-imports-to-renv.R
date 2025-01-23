@@ -4,17 +4,17 @@ test_that("can install local package with dependencies then load and call functi
   dir <- tempdir()
   print(dir)
   setwd(dir)
+  rvendor_install <- rvendor::install
+  rvendor_activate <- rvendor::activate
   renv::init(force = T, bare = T)
-  rvendor_path <- gsub(perl = T, "(?<=rvendor).*", "", current_dir)
-  renv::install(rvendor_path, prompt = F)
-  print("Initialized")
   source("renv/activate.R")
+  renv::install("pkgload", prompt = F)
+
   package_dir <- paste0(current_dir, "/mockWithDeps")
-  rvendor::install(package_dir, prompt = F)
-  rvendor::activate()
+  rvendor_install(package_dir, prompt = F)
+  rvendor_activate()
   library(mockWithDeps)
   res <- hello_world()
   renv::deactivate()
   expect_equal(res, "hello")
 })
-
