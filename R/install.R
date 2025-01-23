@@ -2,6 +2,12 @@
 #' @inheritParams renv::install
 #' @export
 #' @description Installs the vendored package to the `./rvendor` directory
+#' @inheritParams renv::install
+#' @examples
+#' \dontrun{
+#' rvendor::install("../<my-local-path>")
+#' rvendor::install("<org-name>/<repo-name>")
+#' }
 install <- function(...) {
   args <- c(...)
   package_name <- pkgload::pkg_name(args[[1]])
@@ -43,8 +49,14 @@ install <- function(...) {
 }
 
 #' activate
+#' 
+#' Activates the vendored package by adding the `./rvendor` directory to the search path.
+#' This script can often be included in a .Rprofile script to activate automatically at shell activation.
 #' @export
-#' @description Activates the vendored package by adding the `./rvendor` directory to the search path
+#' @examples
+#' \dontrun{
+#' rvendor::activate()
+#' }
 activate <- function() {
   .libPaths(c(.libPaths(), "./rvendor"))
 }

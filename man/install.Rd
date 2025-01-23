@@ -7,9 +7,15 @@
 install(...)
 }
 \arguments{
-\item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
-when installing dependencies.}
+\item{...}{Unused arguments, reserved for future expansion. If any arguments
+are matched to \code{...}, renv will signal an error.}
 }
 \description{
 Installs the vendored package to the \code{./rvendor} directory
+}
+\examples{
+\dontrun{
+rvendor::install("../<my-local-path>")
+rvendor::install("<org-name>/<repo-name>")
+}
 }

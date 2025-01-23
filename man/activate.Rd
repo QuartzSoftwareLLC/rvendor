@@ -7,5 +7,11 @@
 activate()
 }
 \description{
-Activates the vendored package by adding the \code{./rvendor} directory to the search path
+Activates the vendored package by adding the \code{./rvendor} directory to the search path.
+This script can often be included in a .Rprofile script to activate automatically at shell activation.
+}
+\examples{
+\dontrun{
+rvendor::activate()
+}
 }
