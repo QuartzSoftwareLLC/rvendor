@@ -38,14 +38,6 @@ install <- function(...) {
   unlink(Sys.glob(paste0("rvendor/", package_name)), recursive = T)
   file.rename(renv_install_path, rvendor_install_path)
   renv::settings$ignored.packages(package_name, persist = T)
-
-  # add activate to .Rprofile
-  rprofile <- file(".Rprofile", "a")
-  lines <- readLines(".Rprofile", warn = FALSE)
-  if (!any(grepl("rvendor::activate()", lines))) {
-    writeLines("rvendor::activate()", rprofile)
-  }
-  close(rprofile)
 }
 
 #' activate
