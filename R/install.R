@@ -8,10 +8,11 @@
 #' rvendor::install("../<my-local-path>")
 #' rvendor::install("<org-name>/<repo-name>")
 #' }
+#' @return No return value, called for side effects
 install <- function(...) {
   args <- c(...)
   package_name <- pkgload::pkg_name(args[[1]])
-  print("Installing Vendored Packages")
+
   dir.create("./rvendor", showWarnings = FALSE, recursive = TRUE)
   # remove package from ignored list
   ignored <- renv::settings$ignored.packages()
@@ -34,7 +35,7 @@ install <- function(...) {
 
   renv::settings$ignored.packages(package_name, persist = T)
 
-  #delete the package from the revndor library
+  #delete the package from the rvendor library
   unlink(Sys.glob(paste0("rvendor/", package_name)), recursive = T)
   file.rename(renv_install_path, rvendor_install_path)
   renv::settings$ignored.packages(package_name, persist = T)
@@ -57,6 +58,7 @@ install <- function(...) {
 #' \dontrun{
 #' rvendor::activate()
 #' }
+#' @return No return value, called for side effects
 activate <- function() {
   .libPaths(c(.libPaths(), "./rvendor"))
 }

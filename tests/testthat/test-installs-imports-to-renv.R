@@ -1,6 +1,5 @@
 test_that("can install local package with dependencies then load and call functions from that package", {
   current_dir <- getwd()
-  print(current_dir)
   dir <- tempdir()
   print(dir)
   setwd(dir)

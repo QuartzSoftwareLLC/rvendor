@@ -1,9 +1,9 @@
 Package: rvendor
-Title: Package Vendoring with Renv
+Title: Package Vendoring with 'renv'
 Version: 0.0.4
 Authors@R: 
     person("Jacob", "Clarke", , "jacobclarke@quartzsoftware.com", role = c("aut", "cre"))
-Description: Vendor private R packages into environments where private credentials cannot be set.
+Description: Simplify the installation of private and local R packages in sandboxed RStudio environments that only allow packages from CRAN or public GitHub repositories. This package automates the process of downloading packages and bundling them with the code that uses them through the use of. This approach ensures that all necessary dependencies are installed and properly configured.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
