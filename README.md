@@ -25,3 +25,10 @@ rvendor::activate() # add all packages in ./rvendor/<package_name> to the librar
 
 library(my.private.package) # load the package as a normal library
 ```
+
+If you want to then use the package in a shiny app. Add the following to your app.R file:
+
+```r
+rvendor::activate()
+library(my.private.package)
+```
