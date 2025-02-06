@@ -11,22 +11,21 @@
 #' @return No return value, called for side effects
 install <- function(...) {
   args <- c(...)
-  package_name <- pkgload::pkg_name(args[[1]])
+
 
   dir.create("./rvendor", showWarnings = FALSE, recursive = TRUE)
-  # remove package from ignored list
-  ignored <- renv::settings$ignored.packages()
-  ignored <- ignored[ignored != package_name]
-  renv::settings$ignored.packages(ignored, persist = T)
+
 
   # remove rvendor from the path in case it has already been activated
   old_lib_path <- .libPaths()
   new_lib_path  <- old_lib_path[!grepl("rvendor", old_lib_path)]
   .libPaths(new_lib_path)
 
-  renv::install(...)
+  packages <- renv::install(...)
+  package_name <- names(packages)
 
   .libPaths(old_lib_path)
+
 
   # renv install path
   renv_install_path <- paste0(renv::paths$library(), "/", package_name)
@@ -54,6 +53,7 @@ install <- function(...) {
 activate <- function() {
   .libPaths(c(.libPaths(), "./rvendor"))
 }
+
 
 
 

@@ -17,3 +17,21 @@ test_that("can install local package with dependencies then load and call functi
   renv::deactivate()
   expect_equal(res, "hello")
 })
+
+test_that("can install cran packages", {
+  dir <- tempdir()
+
+  rvendor_install <- rvendor::install
+  rvendor_activate <- rvendor::activate
+  renv::init(force = T, bare = T)
+  source("renv/activate.R")
+
+  package_dir <- paste0(current_dir, "/mockWithDeps")
+  rvendor_install("stringr", prompt = F)
+  rvendor_activate()
+  library(mockWithDeps)
+  res <- "hello"
+  renv::deactivate()
+  new_res <- as.character(stringr::str_glue("{res}"))
+  expect_equal(res, new_res)
+})
