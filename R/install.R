@@ -22,7 +22,7 @@ install <- function(...) {
   .libPaths(new_lib_path)
 
   packages <- renv::install(...)
-  package_name <- names(packages)
+  package_name <- names(packages) |> tail(1)
 
   .libPaths(old_lib_path)
 
