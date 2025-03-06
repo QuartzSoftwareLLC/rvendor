@@ -1,5 +1,5 @@
 #' @export
-#' @import mime
+#' @import svUnit
 hello_world <- function() {
   "hello"
 }

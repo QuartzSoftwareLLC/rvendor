@@ -1,37 +1,67 @@
-test_that("can install local package with dependencies then load and call functions from that package", {
-  current_dir <- getwd()
-  dir <- tempdir()
-  print(dir)
-  setwd(dir)
-  rvendor_install <- rvendor::install
-  rvendor_activate <- rvendor::activate
-  renv::init(force = T, bare = T)
-  source("renv/activate.R")
-  renv::install("pkgload", prompt = F)
+# setwd("tests/testthat")
+rvendor_install <- rvendor::install
+rvendor_activate <- rvendor::activate
 
-  package_dir <- paste0(current_dir, "/mockWithDeps")
-  rvendor_install(package_dir, prompt = F)
+test_dir <- getwd()
+
+
+dir <- tempdir()
+dir.create(file.path(dir, "base"))
+setwd(paste0(dir, "/base"))
+
+renv::init(force = T, bare = T)
+source("renv/activate.R")
+renv::install("pkgload", prompt = F)
+renv::install("testthat", prompt = F)
+
+
+#' This test file verifies that rvendor can properly install packages and their dependencies
+#' into an renv environment, and that those packages can then be loaded and used.
+#' 
+#' The tests:
+#' 1. Set up a clean renv environment in a temporary directory
+#' 2. Install packages using rvendor::install
+#' 3. Activate the environment using rvendor::activate
+# 4. Verify the packages work as expected
+#
+# The test environment is reset between each test using initialize_test_env()
+initialize_test_env <- function() {
+  unlink(paste0(dir, "/test"), recursive = T)
+  dir.create(file.path(dir, "test"))
+  file.copy(list.files(paste0(dir, "/base"), full.names = TRUE), paste0(dir, "/test"), recursive = TRUE)
+  setwd(paste0(dir, "/test"))
+  source("renv/activate.R")
+}
+
+
+test_that("can install local package with dependencies then load and call functions from that package", {
+  initialize_test_env()
+
+  rvendor_install(paste0(test_dir, "/mockWithDeps"), prompt = F)
   rvendor_activate()
   library(mockWithDeps)
   res <- hello_world()
   renv::deactivate()
+
+
   expect_equal(res, "hello")
 })
 
 test_that("can install cran packages", {
-  dir <- tempdir()
-
-  rvendor_install <- rvendor::install
-  rvendor_activate <- rvendor::activate
-  renv::init(force = T, bare = T)
-  source("renv/activate.R")
-
-  package_dir <- paste0(current_dir, "/mockWithDeps")
-  rvendor_install("stringr", prompt = F)
+  initialize_test_env()
+  rvendor_install("svUnit", prompt = F)
   rvendor_activate()
-  library(mockWithDeps)
-  res <- "hello"
+  library(svUnit)
   renv::deactivate()
-  new_res <- as.character(stringr::str_glue("{res}"))
-  expect_equal(res, new_res)
 })
+
+
+test_that("can uninstall", {
+  initialize_test_env()
+  rvendor_install("svUnit", prompt = F)
+  rvendor::uninstall("svUnit")
+  renv::deactivate()
+})
+
+
+

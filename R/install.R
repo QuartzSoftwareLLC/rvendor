@@ -44,6 +44,24 @@ install <- function(...) {
   file.rename(renv_install_path, rvendor_install_path)
 }
 
+#' uninstall
+#' 
+#' Uninstalls the vendored package by removing it from the `./rvendor` directory.
+#' @export
+#' @examples
+#' \dontrun{
+#' rvendor::uninstall("<package-name>")
+#' }
+#' @return No return value, called for side effects
+uninstall <- function(package_name) {
+  unlink(Sys.glob(paste0("rvendor/", package_name)), recursive = T)
+
+  # remove from ignored packages list
+  ignored <- renv::settings$ignored.packages()
+  ignored <- ignored[ignored != package_name] 
+  renv::settings$ignored.packages(ignored, persist = T)
+}
+
 #' activate
 #' 
 #' Activates the vendored package by adding the `./rvendor` directory to the search path.

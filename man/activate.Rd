@@ -6,6 +6,9 @@
 \usage{
 activate()
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Activates the vendored package by adding the \code{./rvendor} directory to the search path.
 This script can often be included in a .Rprofile script to activate automatically at shell activation.

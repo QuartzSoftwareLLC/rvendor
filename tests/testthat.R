@@ -10,3 +10,4 @@ library(testthat)
 library(rvendor)
 
 test_check("rvendor")
+

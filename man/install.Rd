@@ -10,6 +10,9 @@ install(...)
 \item{...}{Unused arguments, reserved for future expansion. If any arguments
 are matched to \code{...}, renv will signal an error.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Installs the vendored package to the \code{./rvendor} directory
 }
